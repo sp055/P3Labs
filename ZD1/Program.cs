@@ -18,7 +18,7 @@ namespace ZD1
         static void Main(string[] args)
         {
             Console.WriteLine("Podawaj wszystkie wartości w systemie dziesiętnym!");    //przypomnienie
-            try
+            try                                                                        //szukanie błędu
             {
                 Console.WriteLine("Podaj wartość a: ");
                 a = double.Parse(Console.ReadLine());                                //wartość a
