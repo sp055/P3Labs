@@ -72,7 +72,7 @@ namespace ZD1
                 {
                     a = MiejscaZerowe.mz1;
                 }
-                else if (delta >= 0)
+                else if (delta > 0)
                 {
                     a = MiejscaZerowe.mz2;
                 }
