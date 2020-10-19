@@ -1,4 +1,4 @@
 # P3Labs
 <p align="center">
-![](gif.gif)
+<img src="gif.gif" alt="animated" />
  </p>
