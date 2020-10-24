@@ -13,6 +13,29 @@ namespace ZD3
             Zdanie(Console.ReadLine());                                         // czyta tekst wpisany do konsoli i przesyla do funkcji
         }
 
+        static void Tablica()
+        {
+            Random rnd = new Random();                                          // zastosowanie klasy random do losowania liczb
+            int pierwszywymiar = 10;
+            int suma = 0;
+            int[][] tablica = new int[pierwszywymiar][];                        // stworzenie tablicy
+
+            for (int i = 0; i < tablica.Length; i++)                            // wykonuje pętlę tyle razy ile wynosi wielkość pierwszego wymiaru
+            {
+                tablica[i] = new int[rnd.Next(10)];                             // losowanie wielkości drugiego wymiaru
+
+                for (int j = 0; j < tablica[i].Length; j++)                     // wykonuje pętlę tyle razy ile wynosi wartość drugiego wymiaru dla wybranego wymiaru pierwszego
+                {
+                    tablica[i][j] = 1;                                          // do każdego pola przypisuje wartość 1
+                    Console.Write("|" + tablica[i][j] + "|");                   // wypisuje wartości
+                    suma += tablica[i][j];                                      // suma pól
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("=======================");
+            Console.WriteLine($"Suma wszystkich pól: {suma}");                  // wynik
+        }
+
         static void Zdanie(string tekst)
         {
             tekst = tekst.Trim();                                               // usuwa spacje z początku i końca tekstu (jeśli na końcu nie ma innego znaku)
@@ -38,45 +61,6 @@ namespace ZD3
             {
                 Console.WriteLine(tekst + ".");                                 // dodaje kropkę do tekstu
             }
-        }
-
-        static void Tablica()
-        {
-            Random rnd = new Random();                                          // zastosowanie klasy random do losowania liczb
-            int pierwszywymiar = 10;
-
-            int[][] tablica = new int[pierwszywymiar][];                        // stworzenie tablicy
-
-            for (int i = 0; i < tablica.Length; i++)                            // wykonuje pętlę tyle razy ile wynosi wielkość pierwszego wymiaru
-            {
-                tablica[i] = new int[rnd.Next(10)];                             // losowanie wielkości drugiego wymiaru
-
-                for (int j = 0; j < tablica[i].Length; j++)                     // wykonuje pętlę tyle razy ile wynosi wartość drugiego wymiaru dla wybranego wymiaru pierwszego
-                {
-                    tablica[i][j] = 1;                                          // do każdego pola przypisuje wartość 1
-                }
-            }
-
-            for (int i = 0; i < tablica.Length; i++)
-            {
-                for (int j = 0; j < tablica[i].Length; j++)
-                {
-                    Console.Write("|" + tablica[i][j] + "|");                   // wypisuje wartości pól tablicy
-                }
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("=======================");
-            int suma = 0;
-
-            for (int i = 0; i < tablica.Length; i++)
-            {
-                for (int j = 0; j < tablica[i].Length; j++)
-                {
-                    suma += tablica[i][j];                                      // dodaje każde pole do siebie 
-                }
-            }
-            Console.WriteLine($"Suma wszystkich pól: {suma}");                  // wynik
         }
     }
 }
