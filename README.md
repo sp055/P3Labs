@@ -1,2 +1,1 @@
-# P3Labs
-Studia
+
