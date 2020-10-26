@@ -30,9 +30,9 @@ namespace ZD4
             //SprawdzenieCzyTamJest(tablica);
             Console.WriteLine("Czego szukasz?");
             string szukana = Console.ReadLine();
-            Szukanie(tablica, szukana.ToUpper());
+            Szukanie(tablica, szukana.ToUpper());                                                   // przesyła tablice i to co wpisał użytkownik w UPPERCASE
         }
-        static void Szukanie(Ksiazka[,,] tablica, string szukana)
+        static void Szukanie(Ksiazka[,,] tablica, string szukana)                                   // funkcja wyszukuje czy dana książka gdzieś się znajduje
         {
             bool jest;
             for (int i = 0; i < 3; i++)
@@ -41,8 +41,8 @@ namespace ZD4
                 {
                     for (int k = 0; k < 10; k++)
                     {
-                        jest = tablica[i, j, k].Autor.ToUpper().Contains(szukana) ^ tablica[i, j, k].Tytul.ToUpper().Contains(szukana); ;
-                        if (jest == true)
+                        jest = tablica[i, j, k].Autor.ToUpper().Contains(szukana) ^ tablica[i, j, k].Tytul.ToUpper().Contains(szukana); ;       // sprawdza czy ciąg znaków podany przez użytkownika istnieje gdzieś w książkach
+                        if (jest == true)                                                           // jeśli istnieje to wypisuje dane książki i w którym miejscu jest
                         {
                             Console.WriteLine($"Książka której prawdopodobnie szukasz: {tablica[i, j, k].Autor} '{tablica[i, j, k].Tytul}' " +
                                 $"Znajduje się na {tablica[i, j, k].NrRegalu} regale, {tablica[i, j, k].NrPolki} półce i {tablica[i, j, k].NrMiejsca} miejscu");
@@ -54,7 +54,7 @@ namespace ZD4
             Console.WriteLine("Nic nie znaleziono.");
         }
 
-        static void WstawienieNaMiejsca(Ksiazka[,,] tablica)
+        static void WstawienieNaMiejsca(Ksiazka[,,] tablica)                                        // rozkłada książki na miejscach
         {
             Ksiazka a;
             Ksiazka b = new Ksiazka("Jonny Bravo", "Jak osiągnąć sukces w 30min", 2, 5, 3);
@@ -73,7 +73,7 @@ namespace ZD4
             tablica[2, 5, 3] = b;
         }
 
-        static void SprawdzenieCzyTamJest(Ksiazka[,,] tablica)
+        static void SprawdzenieCzyTamJest(Ksiazka[,,] tablica)                                      // testowa funkcja do sprawdzenia czy książki są tam gdzie powinny
         {
             for (int i = 0; i < 3; i++)
             {
