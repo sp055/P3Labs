@@ -41,7 +41,7 @@ namespace ZD4
                 {
                     for (int k = 0; k < 10; k++)
                     {
-                        jest = tablica[i, j, k].Autor.ToUpper().Contains(szukana) ^ tablica[i, j, k].Tytul.ToUpper().Contains(szukana); ;       // sprawdza czy ciąg znaków podany przez użytkownika istnieje gdzieś w książkach
+                        jest = tablica[i, j, k].Autor.ToUpper().Contains(szukana) ^ tablica[i, j, k].Tytul.ToUpper().Contains(szukana);       // sprawdza czy ciąg znaków podany przez użytkownika istnieje gdzieś w książkach
                         if (jest == true)                                                           // jeśli istnieje to wypisuje dane książki i w którym miejscu jest
                         {
                             Console.WriteLine($"Książka której prawdopodobnie szukasz: {tablica[i, j, k].Autor} '{tablica[i, j, k].Tytul}' " +
