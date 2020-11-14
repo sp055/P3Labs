@@ -22,9 +22,11 @@ namespace ZD4
     }
     class Program
     {
+        static readonly int pierwsza = 3, druga = 6, trzecia = 10;
+
         static void Main()
         {
-            Ksiazka[,,] tablica = new Ksiazka[3, 6, 10];
+            Ksiazka[,,] tablica = new Ksiazka[pierwsza, druga, trzecia];
 
             WstawienieNaMiejsca(tablica);
             //SprawdzenieCzyTamJest(tablica);
@@ -35,11 +37,11 @@ namespace ZD4
         static void Szukanie(Ksiazka[,,] tablica, string szukana)                                   // funkcja wyszukuje czy dana książka gdzieś się znajduje
         {
             bool jest;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < pierwsza; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < druga; j++)
                 {
-                    for (int k = 0; k < 10; k++)
+                    for (int k = 0; k < trzecia; k++)
                     {
                         jest = tablica[i, j, k].Autor.ToUpper().Contains(szukana) ^ tablica[i, j, k].Tytul.ToUpper().Contains(szukana);       // sprawdza czy ciąg znaków podany przez użytkownika istnieje gdzieś w książkach
                         if (jest == true)                                                           // jeśli istnieje to wypisuje dane książki i w którym miejscu jest
@@ -59,11 +61,11 @@ namespace ZD4
             Ksiazka a;
             Ksiazka b = new Ksiazka("Jonny Bravo", "Jak osiągnąć sukces w 30min", 2, 5, 3);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < pierwsza; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < druga; j++)
                 {
-                    for (int k = 0; k < 10; k++)
+                    for (int k = 0; k < trzecia; k++)
                     {
                         a = new Ksiazka("Shrek", "Moje bagno", i + 1, j + 1, k + 1);
                         tablica[i, j, k] = a;
@@ -75,11 +77,11 @@ namespace ZD4
 
         static void SprawdzenieCzyTamJest(Ksiazka[,,] tablica)                                      // testowa funkcja do sprawdzenia czy książki są tam gdzie powinny
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < pierwsza; i++)
             {
-                for (int j = 0; j < 6; j++)
+                for (int j = 0; j < druga; j++)
                 {
-                    for (int k = 0; k < 10; k++)
+                    for (int k = 0; k < trzecia; k++)
                     {
                         Console.WriteLine($"Autor: {tablica[i, j, k].Autor} '{tablica[i, j, k].Tytul}' " +
                             $"Regał: {tablica[i, j, k].NrRegalu} Półka: {tablica[i, j, k].NrPolki} Miejsce: {tablica[i, j, k].NrMiejsca}");
