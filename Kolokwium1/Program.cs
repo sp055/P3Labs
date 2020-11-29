@@ -26,7 +26,7 @@ namespace Kolokwium1
     {
         static void Main(string[] args)
         {
-            //Zadanie1();
+            Zadanie1();
             //Zadanie2();
             //Zadanie3(); // brak 
         }
