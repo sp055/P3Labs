@@ -51,7 +51,7 @@ namespace ZD9
         }
     }
 
-    public static class Rozszerzenia
+    public static class KanalExtension
     {
         public static void Wypisz(this Kanal kanal)
         {
