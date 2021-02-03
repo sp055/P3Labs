@@ -7,6 +7,7 @@ namespace ZD9
     {
         public string Nazwa { get; set; }
         public int ID { get; set; }
+
         public void SubskrybujKanal(Kanal kanal)
         {
             kanal.OpublikowanoFilm += Kanal_OpublikowanoFilm1; ; // dzięki temu event i eventhandler wiedzą o sobie
@@ -36,6 +37,7 @@ namespace ZD9
 
         public void WyswietlFilm(int id)
         {
+            Console.WriteLine($"Użytkownik od ID: {id} obejrzał film.");
             licznikWyswietlen++;
         }
 
@@ -53,7 +55,9 @@ namespace ZD9
     {
         public static void Wypisz(this Kanal kanal)
         {
-            Console.WriteLine($"Nazwa kanału: {kanal.Nazwa} Liczba wyświetleń filmów: {kanal.licznikWyswietlen} Liczba subskrypcji: {kanal.suby} ");
+            Console.WriteLine($"Nazwa kanału: {kanal.Nazwa} " +
+                $"Liczba wyświetleń filmów: {kanal.licznikWyswietlen} " +
+                $"Liczba subskrypcji: {kanal.suby} ");
         }
     }
 
@@ -76,6 +80,10 @@ namespace ZD9
             }
 
             kanal.OpublikujFilm();
+
+            kanal.WyswietlFilm(uzytkownicy[0].ID);
+            kanal.WyswietlFilm(uzytkownicy[4].ID);
+            kanal.WyswietlFilm(uzytkownicy[2].ID);
             kanal.Wypisz();
         }
     }
