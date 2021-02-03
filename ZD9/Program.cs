@@ -31,6 +31,7 @@ namespace ZD9
         public int Id { get; set; }
         public int licznikWyswietlen { get; set; }
         public int suby { get; set; }
+
         public event EventHandler OpublikowanoFilm;
 
         public void WyswietlFilm(int id)
@@ -48,11 +49,11 @@ namespace ZD9
         }
     }
 
-    public static class Extensions
+    public static class Rozszerzenia
     {
-        public static string Wypisz(this Kanal kanal)
+        public static void Wypisz(this Kanal kanal)
         {
-            return $"Nazwa kanału: {kanal.Nazwa} Liczba wyświetleń filmów: {kanal.licznikWyswietlen} Liczba subskrypcji: {kanal.suby} ";
+            Console.WriteLine($"Nazwa kanału: {kanal.Nazwa} Liczba wyświetleń filmów: {kanal.licznikWyswietlen} Liczba subskrypcji: {kanal.suby} ");
         }
     }
 
@@ -75,7 +76,7 @@ namespace ZD9
             }
 
             kanal.OpublikujFilm();
-            Console.WriteLine(Extensions.Wypisz(kanal));
+            kanal.Wypisz();
         }
     }
 }
