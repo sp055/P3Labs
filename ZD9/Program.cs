@@ -10,13 +10,13 @@ namespace ZD9
 
         public void SubskrybujKanal(Kanal kanal)
         {
-            kanal.OpublikowanoFilm += Kanal_OpublikowanoFilm1; ; // dzięki temu event i eventhandler wiedzą o sobie
+            kanal.OpublikowanoFilm += Uzytkownik_OpublikowanoFilm; ; // dzięki temu event i eventhandler wiedzą o sobie
             kanal.LicznikSubskrypcji();
         }
 
-        private void Kanal_OpublikowanoFilm1(object sender, EventArgs e) // to wykonuje się kiedy "wydarzy się" event
+        private void Uzytkownik_OpublikowanoFilm(object sender, EventArgs e) // to wykonuje się kiedy "wydarzy się" event
         {
-            Console.WriteLine($"Użytkownik X otrzymał powiadomienie o nowym filmie."); // instukcje dla tego wydarzenia
+            Console.WriteLine($"Użytkownik {Nazwa} ID: {ID} otrzymał powiadomienie o nowym filmie."); // instukcje dla tego wydarzenia
         }
     }
 
@@ -84,6 +84,7 @@ namespace ZD9
             kanal.WyswietlFilm(uzytkownicy[0].ID);
             kanal.WyswietlFilm(uzytkownicy[4].ID);
             kanal.WyswietlFilm(uzytkownicy[2].ID);
+
             kanal.Wypisz();
         }
     }
