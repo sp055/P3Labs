@@ -12,26 +12,6 @@ namespace Kolokwium2
 {
     public class MagazynLogistyczny
     {
-
-    }
-    public class PunktDystrybucji
-    {
-        public event EventHandler SzukanoPaczki;
-
-        public void SzukajPaczki(int id)
-        {
-            SzukanoPaczki?.Invoke(this, new WyslanoPaczkeEventArgs { IDpaczki = id });
-        }
-        public void Poszukiwano(PunktDystrybucji punktDystrybucji)
-        {
-
-        }
-
-        private void PunktDystrybucji_SzukanoPaczki(object sender, WyslanoPaczkeEventArgs e)
-        {
-            Console.WriteLine($"Szukano paczki.");
-        }
-
         public void Paczkomat_WyslanoPaczke(object sender, WyslanoPaczkeEventArgs e)
         {
             Console.WriteLine($"Wysłano paczke o id: {e.IDpaczki}");
@@ -41,6 +21,23 @@ namespace Kolokwium2
         {
             Console.WriteLine($"Nie znaleziono paczki o id: {e.IDpaczki}");
         }
+
+        public void PunktDystrybucji_SzukanoPaczki(object sender, WyslanoPaczkeEventArgs e)
+        {
+            Console.WriteLine($"Szukano paczki.");
+        }
+    }
+    public class PunktDystrybucji
+    {
+        public event EventHandler SzukanoPaczki;
+
+        public void SzukajPaczki(int id)
+        {
+            SzukanoPaczki?.Invoke(this, new WyslanoPaczkeEventArgs { IDpaczki = id });
+        }
+
+        
+
     }
     public class Paczkomat
     {
@@ -51,7 +48,7 @@ namespace Kolokwium2
             WyslanoPaczke?.Invoke(this, new WyslanoPaczkeEventArgs { IDpaczki = id });
 
         }
-        public void BrakPaczkiM()
+        public void BrakPaczkiM(int id)
         {
             BrakPaczki?.Invoke(this, new WyslanoPaczkeEventArgs { IDpaczki = id });
         }
@@ -96,8 +93,8 @@ namespace Kolokwium2
             PunktDystrybucji punktDystrybucji = new PunktDystrybucji();
             MagazynLogistyczny magazynLogistyczny = new MagazynLogistyczny();
 
-            paczkomat.WyslanoPaczke += punktDystrybucji.Paczkomat_WyslanoPaczke;
-            paczkomat.BrakPaczki += punktDystrybucji.Paczkomat_BrakPaczki;
+            paczkomat.WyslanoPaczke += magazynLogistyczny.Paczkomat_WyslanoPaczke;
+            paczkomat.BrakPaczki += magazynLogistyczny.Paczkomat_BrakPaczki;
         }
 
 
