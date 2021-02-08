@@ -4,82 +4,91 @@ using System.Linq;
 
 namespace Kolokwium2_1
 {
+    public class MagazynLogistyczny
+    {
+
+        public event EventHandler<PaczkaEventArgs> BrakPaczki;
+        private List<int> listaid = new List<int>();
+        public List<int> ListaId
+        {
+            get
+            {
+                return listaid;
+            }
+            set
+            {
+                listaid = value;
+            }
+        }
+
+        public void Handler_SzukanoPaczki(object sender, PaczkaEventArgs e)
+        {
+            Paczkomat a = new Paczkomat();
+
+            a.WyslanoPaczke += Handler_WyslanoPaczke;
+
+            if (ListaId.Contains(e.IDpaczki))   
+                a.WyslijPaczke(e.IDpaczki);
+            else
+                BrakPaczki?.Invoke(this, new PaczkaEventArgs { IDpaczki = e.IDpaczki });
+        }
+
+        public void Handler_WyslanoPaczke(object sender, PaczkaEventArgs e)
+        {
+            Console.WriteLine($"Paczka o id: {e.IDpaczki} została wysłana");
+        }
+    }
+
+    public class PunktDystrybucji
+    {
+        public event EventHandler<PaczkaEventArgs> SzukanoPaczki;
+
+        public void SzukajPaczki(int id)
+        {
+            SzukanoPaczki?.Invoke(this, new PaczkaEventArgs { IDpaczki = id });
+        }
+
+        public void Handler_BrakPaczki(object sender, PaczkaEventArgs e)
+        {
+            Console.WriteLine($"Paczka o id: {e.IDpaczki} nie została odnaleziona.");
+        }
+    }
+
+    public class Paczkomat
+    {
+        public event EventHandler<PaczkaEventArgs> WyslanoPaczke;
+        public void WyslijPaczke(int id)
+        {
+            WyslanoPaczke?.Invoke(this, new PaczkaEventArgs { IDpaczki = id });
+        }
+    }
+
+    public class PaczkaEventArgs : EventArgs
+    {
+        public int IDpaczki { get; set; }
+    }
+
+    public class MojaKlasa<Typ1, Typ2>
+    {
+        public void GenerujSlownik(List<Typ1> typ1, List<Typ2> typ2)
+        {
+            Dictionary<Typ1, Typ2> openWith = new Dictionary<Typ1, Typ2>();
+
+            for (int i = 0; i < typ1.Count; i++)
+            {
+                openWith.Add(typ1[i], typ2[i]);
+            }
+
+            foreach (var item in openWith)
+            {
+                Console.WriteLine($"{item.Key} | {item.Value}");
+            }
+
+        }
+    }
+
     class Program
     {
-        public class MagazynLogistyczny
-        {
-            public event EventHandler<PaczkaEventArgs> BrakPaczki;
-            private List<int> listaid = new List<int>();
-            public List<int> ListaId
-            {
-                get
-                {
-                    return listaid;
-                }
-                set
-                {
-                    listaid = value;
-                }
-            }
-
-            public void Handler_SzukanoPaczki(object sender, PaczkaEventArgs e)
-            {
-                if (ListaId.Contains(e.IDpaczki))
-                    Console.WriteLine($"Znaleziono paczkę o id: {e.IDpaczki}");
-                else
-                    BrakPaczki?.Invoke(this, new PaczkaEventArgs { IDpaczki = e.IDpaczki });
-            }
-        }
-
-
-        public class PunktDystrybucji
-        {
-            public event EventHandler<PaczkaEventArgs> SzukanoPaczki;
-
-            public void SzukajPaczki(int id)
-            {
-                SzukanoPaczki?.Invoke(this, new PaczkaEventArgs { IDpaczki = id });
-            }
-
-            public void Handler_BrakPaczki(object sender, PaczkaEventArgs e)
-            {
-                Console.WriteLine($"Paczka o id: {e.IDpaczki} nie została odnaleziona.");
-            }
-        }
-
-        public class Paczkomat
-        {
-            public event EventHandler<PaczkaEventArgs> WyslanoPaczke;
-            public void WyslijPaczke(int id)
-            {
-                WyslanoPaczke?.Invoke(this, new PaczkaEventArgs { IDpaczki = id });
-            }
-        }
-
-        public class PaczkaEventArgs : EventArgs
-        {
-            public int IDpaczki { get; set; }
-        }
-
-        public class MojaKlasa<Typ1, Typ2>
-        {
-            public void GenerujSlownik(List<Typ1> typ1, List<Typ2> typ2)
-            {
-                Dictionary<Typ1, Typ2> openWith = new Dictionary<Typ1, Typ2>();
-
-                for (int i = 0; i < typ1.Count; i++)
-                {
-                    openWith.Add(typ1[i], typ2[i]);
-                }
-
-                foreach (var item in openWith)
-                {
-                    Console.WriteLine($"{item.Key} | {item.Value}");
-                }
-
-            }
-        }
-
         static void Main(string[] args)
         {
             Zadanie1();
@@ -98,11 +107,12 @@ namespace Kolokwium2_1
             {
                 Console.Write(item);
             }
+            Console.WriteLine();
         }
         static void Zadanie2()
         {
             var a = new List<int> { 1, 2, 3 };
-            var b = new List<string> { "fajnie", "fajnie", "fajnie" };
+            var b = new List<string> { "no", "to", "fajnie" };
             var klasa = new MojaKlasa<int, string>();
 
             klasa.GenerujSlownik(a, b);
@@ -121,24 +131,12 @@ namespace Kolokwium2_1
 
             int idpaczki = 67890;
 
+            //paczkomat.WyslanoPaczke += magazyn.Handler_WyslanoPaczke;
             punktd.SzukanoPaczki += magazyn.Handler_SzukanoPaczki;
             magazyn.BrakPaczki += punktd.Handler_BrakPaczki;
 
             punktd.SzukajPaczki(idpaczki);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
 
