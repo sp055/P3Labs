@@ -23,13 +23,6 @@ namespace Kolokwium2_1
 
         public void Handler_SzukanoPaczki(object sender, PaczkaEventArgs e)
         {
-            Paczkomat a = new Paczkomat();
-
-            a.WyslanoPaczke += Handler_WyslanoPaczke;
-
-            if (ListaId.Contains(e.IDpaczki))   
-                a.WyslijPaczke(e.IDpaczki);
-            else
                 BrakPaczki?.Invoke(this, new PaczkaEventArgs { IDpaczki = e.IDpaczki });
         }
 
@@ -131,11 +124,14 @@ namespace Kolokwium2_1
 
             int idpaczki = 67890;
 
-            //paczkomat.WyslanoPaczke += magazyn.Handler_WyslanoPaczke;
+            paczkomat.WyslanoPaczke += magazyn.Handler_WyslanoPaczke;
             punktd.SzukanoPaczki += magazyn.Handler_SzukanoPaczki;
             magazyn.BrakPaczki += punktd.Handler_BrakPaczki;
 
+
             punktd.SzukajPaczki(idpaczki);
+
+            paczkomat.WyslijPaczke(idpaczki);
         }
     }
 }
