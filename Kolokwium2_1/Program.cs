@@ -95,7 +95,7 @@ namespace Kolokwium2_1
             str = Console.ReadLine();
             char[] characters = str.ToCharArray();
 
-            var collection = characters.OrderBy(x => x).Distinct();
+            var collection = characters.OrderByDescending(x => x).Distinct();
             foreach (var item in collection)
             {
                 Console.Write(item);
